@@ -54,9 +54,9 @@ if (len(sys.argv) < 2):
 
 MOSQUITTO_HOST = 'servername'
 MOSQUITTO_PORT = 1883
-MOSQUITTO_TEMP_MSG = str(sys.argv[1]) # Old channel name in here
-MOSQUITTO_HUMI_MSG = str(sys.argv[2]) # Old channel name now passed by argument
-MOSQUITTO_BASE_TOPIC = str(sys.argv[1]).split('/') # Extract the base topic
+MOSQUITTO_TEMP_MSG = 'fathom/temperature'#str(sys.argv[1]) # Old channel name in here
+MOSQUITTO_HUMI_MSG = 'fathom/humiditiy'#str(sys.argv[2]) # Old channel name now passed by argument
+MOSQUITTO_BASE_TOPIC = 'fathom'#str(sys.argv[1]).split('/') # Extract the base topic
 MOSQUITTO_LWT_TOPIC = MOSQUITTO_BASE_TOPIC[0] + '/LWT' #Create the last-will-and-testament topic
 print('Mosquitto Temp MSG {0}'.format(MOSQUITTO_TEMP_MSG))
 print('Mosquitto Humidity MSG {0}'.format(MOSQUITTO_HUMI_MSG))
