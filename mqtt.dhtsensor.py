@@ -61,7 +61,7 @@ MOSQUITTO_LWT_TOPIC = MOSQUITTO_BASE_TOPIC[0] + '/LWT' #Create the last-will-and
 print('Mosquitto Temp MSG {0}'.format(MOSQUITTO_TEMP_MSG))
 print('Mosquitto Humidity MSG {0}'.format(MOSQUITTO_HUMI_MSG))
 print('Mosquitto LWT MSG {0}'.format(MOSQUITTO_LWT_TOPIC))
-
+'''
 # How long to wait (in seconds) between measurements.
 print "Args length: " + str(len(sys.argv))
 FREQUENCY_SECONDS      = 300
@@ -72,14 +72,15 @@ if (len(sys.argv) > 4):
 
 print('Logging sensor measurements to {0} every {1} seconds.'.format('MQTT', FREQUENCY_SECONDS))
 print('Press Ctrl-C to quit.')
+'''
 print('Connecting to MQTT on {0}'.format(MOSQUITTO_HOST))
 mqttc = mqtt.Client("python_pub")
 mqttc.will_set(MOSQUITTO_LWT_TOPIC, payload='offline', qos=0, retain=True)
-mqttc.connect(MOSQUITTO_HOST,MOSQUITTO_PORT, keepalive=FREQUENCY_SECONDS+10)
+mqttc.connect(MOSQUITTO_HOST,MOSQUITTO_PORT, keepalive=10)
 mqttc.publish(MOSQUITTO_LWT_TOPIC, payload='online', qos=0, retain=True)
 try:
 
-    while True:
+    #while True:
         # Attempt to get sensor reading.
         humidity, temp = Adafruit_DHT.read(DHT_TYPE, DHT_PIN)
 
@@ -114,7 +115,7 @@ try:
 
         # Wait 30 seconds before continuing
         print('Wrote a message to MQTT broker')
-        time.sleep(FREQUENCY_SECONDS)
+        #time.sleep(FREQUENCY_SECONDS)
 
 except Exception as e:
     print('Error connecting to the MQTT server: {0}'.format(e))
